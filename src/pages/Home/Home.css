@@ -1,0 +1,15 @@
+.titulo{
+    color: rgb(97, 59, 1);
+    text-align: center;
+}
+
+.dot{
+    text-align: center;
+}
+
+.photo{
+    width: 500px;
+    height: 500px;
+    display: block;
+    margin: 0 auto;
+}
