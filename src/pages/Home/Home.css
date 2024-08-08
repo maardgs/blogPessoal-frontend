@@ -1,13 +1,9 @@
 .titulo{
-    color: rgb(97, 59, 1);
+    color: blue;
     text-align: center;
 }
 
-.dot{
-    text-align: center;
-}
-
-.photo{
+.img{
     width: 500px;
     height: 500px;
     display: block;
