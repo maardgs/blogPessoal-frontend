@@ -8,7 +8,7 @@ import Login from './pages/login/Login';
 import Cadastro from './pages/cadastro/Cadastro';
 import Home from './pages/home/Home';
 import { AuthProvider } from './contexts/AuthContext';
-import ListaTemas from './components/temas/listaTemas/ListaTemas';
+import ListaTemas from './componentes/temas/listaTemas/ListaTemas';
 
 
 function App() {
