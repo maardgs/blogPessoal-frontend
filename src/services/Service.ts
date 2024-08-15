@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: 'https://blogpessoal-cren.onrender.com'
+  baseURL: 'https://db-blogpesoal-clvr.onrender.com/'
 })
-
+// https://blogpessoal-cren.onrender.com
 export const cadastrarUsuario = async(url: string, dados: Object, setDados: Function) => {
   const resposta = await api.post(url, dados)
   setDados(resposta.data)

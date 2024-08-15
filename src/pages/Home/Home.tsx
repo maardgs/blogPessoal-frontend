@@ -3,6 +3,7 @@ import './Home.css'
 import { House } from '@phosphor-icons/react';
 import ListaPostagens from '../../componentes/postagens/listaPostagens/ListaPostagens';
 import ModalPostagem from '../../componentes/postagens/modalPostagem/ModalPostagem';
+import { Link } from 'react-router-dom';
 
 function Home() {
   
@@ -22,7 +23,9 @@ function Home() {
         </div>
 
         <div className="flex justify-center ">
-          <House alt="" className='w-2/3' />
+          <Link to="/home" aria-label="Ir para a página inicial">
+              <House alt="Página Inicial" className='w-8' />
+          </Link>
   
         </div>
       </div>

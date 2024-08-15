@@ -4,22 +4,23 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import Postagem from '../../../models/Postagem';
 import Tema from '../../../models/Tema';
 import { buscar, atualizar, cadastrar } from '../../../services/Service';
+import { toastAlerta } from '../../../util/toastAlerta';
 
 
 function FormularioPostagem() {
-  let navigate = useNavigate();
+  let navigate = useNavigate(); 
 
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>(); 
 
-  const { usuario, handleLogout } = useContext(AuthContext);
+  const { usuario, handleLogout } = useContext(AuthContext); 
   const token = usuario.token;
 
-  const [temas, setTemas] = useState<Tema[]>([]);
+  const [temas, setTemas] = useState<Tema[]>([]); 
 
   const [tema, setTema] = useState<Tema>({
     id: 0,
     descricao: '',
-  });
+  }); 
 
   const [postagem, setPostagem] = useState<Postagem>({
     id: 0,
@@ -28,7 +29,8 @@ function FormularioPostagem() {
     data: '',
     tema: null,
     usuario: null,
-  });
+  })
+
 
   async function buscarPostagemPorId(id: string) {
     await buscar(`/postagens/${id}`, setPostagem, {
@@ -38,6 +40,7 @@ function FormularioPostagem() {
     });
   }
 
+
   async function buscarTemaPorId(id: string) {
     await buscar(`/temas/${id}`, setTema, {
       headers: {
@@ -45,6 +48,7 @@ function FormularioPostagem() {
       },
     });
   }
+
 
   async function buscarTemas() {
     await buscar('/temas', setTemas, {
@@ -54,22 +58,24 @@ function FormularioPostagem() {
     });
   }
 
+
   useEffect(() => {
     if (token === '') {
-      alert('Você precisa estar logado');
+      toastAlerta('Você precisa estar logado', 'info');
       navigate('/');
     }
   }, [token]);
 
+  
   useEffect(() => {
     buscarTemas();
     if (id !== undefined) {
       buscarPostagemPorId(id);
       console.log(tema);
-
     }
   }, [id]);
 
+ 
   useEffect(() => {
     setPostagem({
       ...postagem,
@@ -77,6 +83,7 @@ function FormularioPostagem() {
     });
   }, [tema]);
 
+  
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
     setPostagem({
       ...postagem,
@@ -86,33 +93,35 @@ function FormularioPostagem() {
     });
   }
 
+ 
   function retornar() {
     navigate('/postagens');
   }
 
+ 
   async function gerarNovaPostagem(e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
+    e.preventDefault(); 
 
     console.log({ postagem });
 
-    if (id != undefined) {
+    if (id != undefined) { 
       try {
         await atualizar(`/postagens`, postagem, setPostagem, {
           headers: {
             Authorization: token,
           },
         });
-        alert('Postagem atualizada com sucesso');
+        toastAlerta('Postagem atualizada com sucesso','sucesso');
         retornar();
       } catch (error: any) {
         if (error.toString().includes('403')) {
-          alert('O token expirou, favor logar novamente')
-          handleLogout()
+          toastAlerta('O token expirou, favor logar novamente','info');
+          handleLogout();
         } else {
-          alert('Erro ao atualizar a Postagem');
+          toastAlerta('Erro ao atualizar a Postagem','erro');
         }
       }
-    } else {
+    } else { 
       try {
         await cadastrar(`/postagens`, postagem, setPostagem, {
           headers: {
@@ -120,20 +129,22 @@ function FormularioPostagem() {
           },
         });
 
-        alert('Postagem cadastrada com sucesso');
+        toastAlerta('Postagem cadastrada com sucesso','sucesso');
         retornar();
       } catch (error: any) {
         if (error.toString().includes('403')) {
-          alert('O token expirou, favor logar novamente')
-          handleLogout()
+          toastAlerta('O token expirou, favor logar novamente','info');
+          handleLogout();
         } else {
-          alert('Erro ao cadastrar a Postagem');
+          toastAlerta('Erro ao cadastrar a Postagem','erro');
         }
       }
     }
   }
 
-  const carregandoTema = tema.descricao === '';
+  console.log(postagem);
+
+  const carregandoTema = tema.descricao === ''; // Verifica se o tema ainda está carregando
   return (
     <div className="container flex flex-col mx-auto items-center">
       <h1 className="text-4xl text-center my-8">{id !== undefined ? 'Editar Postagem' : 'Cadastrar Postagem'}</h1>
