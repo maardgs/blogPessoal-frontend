@@ -1,9 +1,6 @@
-import React from "react";
 import "./Home.css";
-import { House } from "@phosphor-icons/react";
 import ListaPostagens from "../../componentes/postagens/listaPostagens/ListaPostagens";
 import ModalPostagem from "../../componentes/postagens/modalPostagem/ModalPostagem";
-import { Link } from "react-router-dom";
 
 function Home() {
   return (
