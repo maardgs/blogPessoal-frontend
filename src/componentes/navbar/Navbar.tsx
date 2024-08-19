@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { toastAlerta } from "../../util/toastAlerta";
-import { House } from "@phosphor-icons/react";
 
 function Navbar() {
   let navigate = useNavigate();
@@ -19,7 +18,7 @@ function Navbar() {
 
   if (usuario.token !== "") {
     navbarComponent = (
-      <div className="w-full bg-indigo-900 text-white flex justify-center py-4">
+      <div className="w-full bg-orange-400 text-white flex justify-center py-4">
         <div className="container flex justify-between text-lg">
           <Link to="/home" className="text-2xl font-bold uppercase">
             Blog Pessoal
